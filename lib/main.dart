@@ -1,22 +1,25 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'; // Import ไลบรารี Material ของ Flutter
 
 void main() {
-  runApp(const MyApp()); // เริ่มแอปโดยใช้ MyApp เป็นวิดเจ็ตราก
+  // จุดเริ่มต้นของแอป Flutter
+  runApp(const MyApp()); // บอก Flutter ว่าวิดเจ็ตใดคือรากฐานของแอป
 }
 
+// MyApp โดยทั่วไปคือวิดเจ็ตรากฐานของแอปพลิเคชันของคุณ
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({super.key}); // Constructor
 
   @override
   Widget build(BuildContext context) {
+    // เมธอด build() ส่งคืนโครงสร้างต้นไม้วิดเจ็ตสำหรับวิดเจ็ตนี้
     return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false, // ซ่อนแบนเนอร์ DEBUG
+      title: 'My Awesome App',
+      debugShowCheckedModeBanner: false, // ซ่อนแบนเนอร์ debug
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        useMaterial3: true, // ใช้ Material Design เวอร์ชันล่าสุด
       ),
-      home: const MyHomePage(), // หน้าหลักของแอป
+      home: const MyHomePage(), // วิดเจ็ตหน้าจอหลักของคุณ
     );
   }
 }
@@ -27,47 +30,44 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // ให้โครงสร้างแอปพื้นฐาน
       appBar: AppBar(
-        title: const Text('Chapter 3 Lab.'),
-        backgroundColor: Colors.teal,
+        title: const Text('Home Page'),
+        backgroundColor: Colors.blue, // ปรับแต่งสี AppBar
+        toolbarHeight: 80.0,
       ),
-      body: const Center(
-        child: Padding(
-          padding: EdgeInsets.all(16.0),
-          child: MyBoxContent(),
+      body: Center(
+        // พื้นที่เนื้อหาหลัก
+        child: Container(
+          padding: EdgeInsets.all(10.0),
+          width: 300.0,
+          height: 200.0,
+          decoration: BoxDecoration(
+            color: Colors.amber,
+            borderRadius: BorderRadius.horizontal(
+              left: Radius.circular(50.0),
+              right: Radius.elliptical(50.0, 50.0),
+            ),
+          ),
+          child: Center(
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(35.0),
+              child: Image.asset(
+                'assets/images/A-Cat.jpg', // URL ของภาพที่ต้องการแสดง
+                width: 250,
+                //height: 200,
+                //fit: BoxFit.cover, // ปรับขนาดภาพให้พอดีกับ Container
+              ),
+            ),
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          // การกระทำที่จะทำเมื่อกดปุ่ม
           print('FAB Pressed!');
         },
-        child: const Icon(Icons.add),
-      ),
-    );
-  }
-}
-
-class MyBoxContent extends StatelessWidget {
-  const MyBoxContent({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 200,
-      height: 100,
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        color: Colors.lightBlueAccent,
-        borderRadius: BorderRadius.circular(12.0),
-        border: Border.all(color: Colors.black, width: 2),
-      ),
-      child: const Text(
-        'Boxed Content',
-        style: TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.bold,
-          color: Colors.white,
-        ),
+        child: const Icon(Icons.add), // ไอคอนสำหรับปุ่ม
       ),
     );
   }
